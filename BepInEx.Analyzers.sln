@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30524.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers", "BepInEx.Analyzers\BepInEx.Analyzers\BepInEx.Analyzers.csproj", "{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.CodeFixes", "BepInEx.Analyzers\BepInEx.Analyzers.CodeFixes\BepInEx.Analyzers.CodeFixes.csproj", "{04871F5E-22CC-4582-A782-0325AC03084E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Package", "BepInEx.Analyzers\BepInEx.Analyzers.Package\BepInEx.Analyzers.Package.csproj", "{1849828F-70E2-4044-B11E-0F74DF38FAAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Test", "BepInEx.Analyzers\BepInEx.Analyzers.Test\BepInEx.Analyzers.Test.csproj", "{44F9C392-E6B4-407A-82A4-4A24035F932A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Vsix", "BepInEx.Analyzers\BepInEx.Analyzers.Vsix\BepInEx.Analyzers.Vsix.csproj", "{964763B1-1A84-4E53-B39E-E9048E0676E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04871F5E-22CC-4582-A782-0325AC03084E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04871F5E-22CC-4582-A782-0325AC03084E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04871F5E-22CC-4582-A782-0325AC03084E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04871F5E-22CC-4582-A782-0325AC03084E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE01921D-22B3-4BD8-A731-3CF369066163}
+	EndGlobalSection
+EndGlobal
