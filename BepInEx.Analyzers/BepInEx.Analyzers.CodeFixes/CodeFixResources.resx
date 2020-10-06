@@ -120,8 +120,10 @@
   <data name="BepInExMissingAttributeCodeFixTitle" xml:space="preserve">
     <value>Add BepInPlugin attribute</value>
   </data>
+  <data name="BepInExMissingInheritanceCodeFixTitle" xml:space="preserve">
+    <value>Inherit from BaseUnityPlugin</value>
+  </data>
   <data name="HarmonyStaticMethodCodeFixTitle" xml:space="preserve">
     <value>Make static</value>
-    <comment>The title of the code fix.</comment>
   </data>
 </root>

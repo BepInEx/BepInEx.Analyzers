@@ -70,6 +70,15 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inherit from BaseUnityPlugin.
+        /// </summary>
+        internal static string BepInExMissingInheritanceCodeFixTitle {
+            get {
+                return ResourceManager.GetString("BepInExMissingInheritanceCodeFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Make static.
         /// </summary>
         internal static string HarmonyStaticMethodCodeFixTitle {

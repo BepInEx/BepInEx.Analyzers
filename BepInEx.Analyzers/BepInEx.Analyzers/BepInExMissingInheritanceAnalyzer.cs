@@ -8,13 +8,13 @@ using static BepInEx.Analyzers.Shared;
 namespace BepInEx.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class BepInExMissingAttributeAnalyzer : DiagnosticAnalyzer
+    public class BepInExMissingInheritanceAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "BepInEx001";
+        public const string DiagnosticId = "BepInEx002";
 
-        private static readonly LocalizableString Title = new LocalizableResourceString(nameof(Resources.BepInExMissingAttributeAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(Resources.BepInExMissingAttributeAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString Description = new LocalizableResourceString(nameof(Resources.BepInExMissingAttributeAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
+        private static readonly LocalizableString Title = new LocalizableResourceString(nameof(Resources.BepInExMissingInheritanceAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
+        private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(Resources.BepInExMissingInheritanceAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
+        private static readonly LocalizableString Description = new LocalizableResourceString(nameof(Resources.BepInExMissingInheritanceAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private const string Category = "Class Declaration";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true, Description);
@@ -32,10 +32,10 @@ namespace BepInEx.Analyzers
         {
             var classDeclaration = (ClassDeclarationSyntax)context.Node;
 
-            if (HasBepInPluginAttribute(classDeclaration))
+            if (!HasBepInPluginAttribute(classDeclaration))
                 return;
 
-            if (!DerivesFromBaseUnityPlugin(classDeclaration))
+            if (DerivesFromBaseUnityPlugin(classDeclaration))
                 return;
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));

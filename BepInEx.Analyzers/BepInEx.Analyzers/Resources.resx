@@ -118,27 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BepInExMissingAttributeAnalyzerDescription" xml:space="preserve">
-    <value>Classes deriving from BaseUnityPlugin must have a BepInPlugin attribute.</value>
+    <value>Classes inheriting from BaseUnityPlugin must have a BepInPlugin attribute.</value>
   </data>
   <data name="BepInExMissingAttributeAnalyzerMessageFormat" xml:space="preserve">
-    <value>Class {0} deriving from BaseUnityPlugin must have a BepInPlugin attribute</value>
+    <value>Class {0} inheriting from BaseUnityPlugin must have a BepInPlugin attribute</value>
   </data>
   <data name="BepInExMissingAttributeAnalyzerTitle" xml:space="preserve">
-    <value>Class deriving from BaseUnityPlugin missing BepInPlugin attribute</value>
+    <value>Class inheriting from BaseUnityPlugin missing BepInPlugin attribute</value>
+  </data>
+  <data name="BepInExMissingInheritanceAnalyzerDescription" xml:space="preserve">
+    <value>Classes with BepInPlugin attribute must inherit from BaseUnityPlugin.</value>
+  </data>
+  <data name="BepInExMissingInheritanceAnalyzerMessageFormat" xml:space="preserve">
+    <value>Class {0} has BepInPlugin attribute but does not inherit from BaseUnityPlugin</value>
+  </data>
+  <data name="BepInExMissingInheritanceAnalyzerTitle" xml:space="preserve">
+    <value>Classes with BepInPlugin attribute must inherit from BaseUnityPlugin</value>
   </data>
   <data name="HarmonyPrivateMethodSuppressorJustification" xml:space="preserve">
     <value>Don't flag private methods with HarmonyPatch attribute as unused.</value>
   </data>
   <data name="HarmonyStaticMethodAnalyzerDescription" xml:space="preserve">
     <value>Harmony patches must have a 'static' member modifier</value>
-    <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="HarmonyStaticMethodAnalyzerMessageFormat" xml:space="preserve">
     <value>Harmony patch method {0} must have a 'static' member modifier</value>
-    <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="HarmonyStaticMethodAnalyzerTitle" xml:space="preserve">
     <value>Harmony patch missing 'static' member modifier</value>
-    <comment>The title of the diagnostic.</comment>
   </data>
 </root>

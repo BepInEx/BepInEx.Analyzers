@@ -61,7 +61,7 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Classes deriving from BaseUnityPlugin must have a BepInPlugin attribute..
+        ///   Looks up a localized string similar to Classes inheriting from BaseUnityPlugin must have a BepInPlugin attribute..
         /// </summary>
         internal static string BepInExMissingAttributeAnalyzerDescription {
             get {
@@ -70,7 +70,7 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class {0} deriving from BaseUnityPlugin must have a BepInPlugin attribute.
+        ///   Looks up a localized string similar to Class {0} inheriting from BaseUnityPlugin must have a BepInPlugin attribute.
         /// </summary>
         internal static string BepInExMissingAttributeAnalyzerMessageFormat {
             get {
@@ -79,11 +79,38 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class deriving from BaseUnityPlugin missing BepInPlugin attribute.
+        ///   Looks up a localized string similar to Class inheriting from BaseUnityPlugin missing BepInPlugin attribute.
         /// </summary>
         internal static string BepInExMissingAttributeAnalyzerTitle {
             get {
                 return ResourceManager.GetString("BepInExMissingAttributeAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classes with BepInPlugin attribute must inherit from BaseUnityPlugin..
+        /// </summary>
+        internal static string BepInExMissingInheritanceAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("BepInExMissingInheritanceAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class {0} has BepInPlugin attribute but does not inherit from BaseUnityPlugin.
+        /// </summary>
+        internal static string BepInExMissingInheritanceAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("BepInExMissingInheritanceAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classes with BepInPlugin attribute must inherit from BaseUnityPlugin.
+        /// </summary>
+        internal static string BepInExMissingInheritanceAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("BepInExMissingInheritanceAnalyzerTitle", resourceCulture);
             }
         }
         
