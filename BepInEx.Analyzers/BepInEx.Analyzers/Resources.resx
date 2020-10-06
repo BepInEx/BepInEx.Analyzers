@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BepInExMissingAttributeAnalyzerDescription" xml:space="preserve">
+    <value>Classes deriving from BaseUnityPlugin must have a BepInPlugin attribute.</value>
+  </data>
+  <data name="BepInExMissingAttributeAnalyzerMessageFormat" xml:space="preserve">
+    <value>Class {0} deriving from BaseUnityPlugin must have a BepInPlugin attribute</value>
+  </data>
+  <data name="BepInExMissingAttributeAnalyzerTitle" xml:space="preserve">
+    <value>Class deriving from BaseUnityPlugin missing BepInPlugin attribute</value>
+  </data>
   <data name="HarmonyPrivateMethodSuppressorJustification" xml:space="preserve">
     <value>Don't flag private methods with HarmonyPatch attribute as unused.</value>
   </data>

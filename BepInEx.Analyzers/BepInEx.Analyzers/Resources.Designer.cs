@@ -61,6 +61,33 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Classes deriving from BaseUnityPlugin must have a BepInPlugin attribute..
+        /// </summary>
+        internal static string BepInExMissingAttributeAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("BepInExMissingAttributeAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class {0} deriving from BaseUnityPlugin must have a BepInPlugin attribute.
+        /// </summary>
+        internal static string BepInExMissingAttributeAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("BepInExMissingAttributeAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class deriving from BaseUnityPlugin missing BepInPlugin attribute.
+        /// </summary>
+        internal static string BepInExMissingAttributeAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("BepInExMissingAttributeAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Don&apos;t flag private methods with HarmonyPatch attribute as unused..
         /// </summary>
         internal static string HarmonyPrivateMethodSuppressorJustification {

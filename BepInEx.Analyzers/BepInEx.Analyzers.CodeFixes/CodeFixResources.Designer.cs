@@ -61,6 +61,15 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add BepInPlugin attribute.
+        /// </summary>
+        internal static string BepInExMissingAttributeCodeFixTitle {
+            get {
+                return ResourceManager.GetString("BepInExMissingAttributeCodeFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Make static.
         /// </summary>
         internal static string HarmonyStaticMethodCodeFixTitle {
