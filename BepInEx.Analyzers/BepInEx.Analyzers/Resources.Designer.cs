@@ -61,6 +61,15 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t flag private methods with HarmonyPatch attribute as unused..
+        /// </summary>
+        internal static string HarmonyPrivateMethodSuppressorJustification {
+            get {
+                return ResourceManager.GetString("HarmonyPrivateMethodSuppressorJustification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Harmony patches must have a &apos;static&apos; member modifier.
         /// </summary>
         internal static string HarmonyStaticMethodAnalyzerDescription {

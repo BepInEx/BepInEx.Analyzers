@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 using System.Linq;
+using static BepInEx.Analyzers.Shared;
 
 namespace BepInEx.Analyzers
 {
@@ -38,15 +39,6 @@ namespace BepInEx.Analyzers
                 return;
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, method.Identifier.GetLocation(), method.Identifier));
-        }
-
-        private static bool HasHarmonyAttributes(MethodDeclarationSyntax method)
-        {
-            foreach (var attributeList in method.AttributeLists)
-                foreach (var attribute in attributeList.Attributes)
-                    if (attribute.Name.ToString() == "HarmonyPatch")
-                        return true;
-            return false;
         }
     }
 }
