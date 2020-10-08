@@ -35,7 +35,13 @@ namespace BepInEx.Analyzers
             if (!(node is MethodDeclarationSyntax method))
                 return;
 
-            if (!HasHarmonyAttributes(method))
+            //Check if the method or the class containing the method has Harmony related attributes
+            bool hasHarmonyAttributes = HasHarmonyAttributes(method);
+            if (!hasHarmonyAttributes)
+                if (method.Parent is ClassDeclarationSyntax classDeclaration)
+                    if (HasHarmonyAttributes(classDeclaration))
+                        hasHarmonyAttributes = true;
+            if (!hasHarmonyAttributes)
                 return;
 
             foreach (var descriptor in SupportedSuppressions.Where(d => d.SuppressedDiagnosticId == diagnostic.Id))

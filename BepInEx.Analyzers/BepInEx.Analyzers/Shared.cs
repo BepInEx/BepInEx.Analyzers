@@ -4,7 +4,7 @@ namespace BepInEx.Analyzers
 {
     public static class Shared
     {
-        public static bool HasHarmonyAttributes(MethodDeclarationSyntax method)
+        public static bool HasHarmonyAttributes(MemberDeclarationSyntax method)
         {
             foreach (var attributeList in method.AttributeLists)
                 foreach (var attribute in attributeList.Attributes)
@@ -16,9 +16,9 @@ namespace BepInEx.Analyzers
         public static bool HasBepInPluginAttribute(ClassDeclarationSyntax classDeclaration)
         {
             foreach (var attributeList in classDeclaration.AttributeLists)
-            foreach (var attribute in attributeList.Attributes)
-                if (attribute.Name.ToString() == "BepInPlugin")
-                    return true;
+                foreach (var attribute in attributeList.Attributes)
+                    if (attribute.Name.ToString() == "BepInPlugin")
+                        return true;
             return false;
         }
 
