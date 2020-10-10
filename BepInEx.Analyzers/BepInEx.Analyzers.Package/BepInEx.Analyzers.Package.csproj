@@ -10,19 +10,22 @@
   <PropertyGroup>
     <PackageId>BepInEx.Analyzers</PackageId>
     <PackageVersion>1.0.0.0</PackageVersion>
-    <Authors>Mike</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <Authors>BepInEx</Authors>
+    <PackageProjectUrl>https://github.com/BepInEx/BepInEx.Analyzers</PackageProjectUrl>
+    <PackageIconUrl>https://avatars2.githubusercontent.com/u/39589027</PackageIconUrl>
+    <RepositoryUrl>https://github.com/BepInEx/BepInEx.Analyzers</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>BepInEx.Analyzers</Description>
-    <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
+    <Description>Roslyn analyzers for BepInEx plugin developers</Description>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <Copyright>Copyright</Copyright>
-    <PackageTags>BepInEx.Analyzers, analyzers</PackageTags>
+    <PackageTags>BepInEx.Analyzers, BepInEx, analyzers</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
 
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+
+    <Company>BepInEx</Company>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
