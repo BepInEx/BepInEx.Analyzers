@@ -9,14 +9,13 @@
 
   <PropertyGroup>
     <PackageId>BepInEx.Analyzers</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Authors>BepInEx</Authors>
     <PackageProjectUrl>https://github.com/BepInEx/BepInEx.Analyzers</PackageProjectUrl>
     <PackageIconUrl>https://avatars2.githubusercontent.com/u/39589027</PackageIconUrl>
     <RepositoryUrl>https://github.com/BepInEx/BepInEx.Analyzers</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Roslyn analyzers for BepInEx plugin developers</Description>
-    <PackageReleaseNotes></PackageReleaseNotes>
     <Copyright>Copyright</Copyright>
     <PackageTags>BepInEx.Analyzers, BepInEx, analyzers</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
