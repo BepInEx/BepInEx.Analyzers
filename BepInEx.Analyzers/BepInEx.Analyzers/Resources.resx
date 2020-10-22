@@ -138,6 +138,15 @@
   <data name="HarmonyPrivateMethodSuppressorJustification" xml:space="preserve">
     <value>Don't flag private methods with HarmonyPatch attribute as unused.</value>
   </data>
+  <data name="HarmonyPropertyPatchAnalyzerDescription" xml:space="preserve">
+    <value>Patching properties by patching get_ or set_ is not recommended</value>
+  </data>
+  <data name="HarmonyPropertyPatchAnalyzerMessageFormat" xml:space="preserve">
+    <value>Harmony patch should use MethodType.Getter or MethodType.Setter instead of get_ or set_ when patching properties</value>
+  </data>
+  <data name="HarmonyPropertyPatchAnalyzerTitle" xml:space="preserve">
+    <value>Patching properties by patching get_ or set_ is not recommended</value>
+  </data>
   <data name="HarmonyStaticMethodAnalyzerDescription" xml:space="preserve">
     <value>Harmony patches must have a 'static' member modifier</value>
   </data>

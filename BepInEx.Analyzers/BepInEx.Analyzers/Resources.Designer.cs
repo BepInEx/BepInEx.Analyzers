@@ -124,6 +124,33 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Patching properties by patching get_ or set_ is not recommended.
+        /// </summary>
+        internal static string HarmonyPropertyPatchAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("HarmonyPropertyPatchAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harmony patch should use MethodType.Getter or MethodType.Setter instead of get_ or set_ when patching properties.
+        /// </summary>
+        internal static string HarmonyPropertyPatchAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("HarmonyPropertyPatchAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patching properties by patching get_ or set_ is not recommended.
+        /// </summary>
+        internal static string HarmonyPropertyPatchAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("HarmonyPropertyPatchAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Harmony patches must have a &apos;static&apos; member modifier.
         /// </summary>
         internal static string HarmonyStaticMethodAnalyzerDescription {
