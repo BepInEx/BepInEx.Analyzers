@@ -34,7 +34,7 @@ jobs:
     - name: Get target file
       id: getfilename
       shell: bash
-      run: echo "::set-output name=file::$(ls ./BepInEx.Analyzers/BepInEx.Analyzers.Package/bin/Release/BepInEx.Analyzers*.nupkg)"
+      run: echo "::set-output name=file::$(ls ./BepInEx.Analyzers/BepInEx.Analyzers.Package/bin/Nuget/BepInEx.Analyzers*.nupkg)"
       
     - uses: actions/upload-artifact@v1
       with:

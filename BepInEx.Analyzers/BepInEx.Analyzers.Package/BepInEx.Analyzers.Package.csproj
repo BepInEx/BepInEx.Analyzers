@@ -5,6 +5,8 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Configurations>Debug;Release;Nuget</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -25,6 +27,10 @@
     <Company>BepInEx</Company>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Nuget' ">
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

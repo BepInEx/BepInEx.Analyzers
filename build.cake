@@ -35,7 +35,7 @@ Task("Build")
     .Does(() =>
 {
     var buildSettings = new MSBuildSettings {
-        Configuration = "Release",
+        Configuration = "Nuget",
         Restore = true
     };
     MSBuild("./BepInEx.Analyzers.sln", buildSettings);
@@ -68,7 +68,7 @@ Task("Publish")
         return;
     }
 
-    NuGetPush($"./BepInEx.Analyzers/BepInEx.Analyzers.Package/bin/Release/BepInEx.Analyzers.{version}.nupkg", new NuGetPushSettings {
+    NuGetPush($"./BepInEx.Analyzers/BepInEx.Analyzers.Package/bin/Nuget/BepInEx.Analyzers.{version}.nupkg", new NuGetPushSettings {
         Source = nugetSource,
         ApiKey = nugetKey
     });

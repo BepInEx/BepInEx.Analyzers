@@ -6,6 +6,12 @@
 
     <!-- Avoid ID conflicts with the package project. -->
     <PackageId>*$(MSBuildProjectFullPath)*</PackageId>
+    <Configurations>Debug;Release;Nuget</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Nuget' ">
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

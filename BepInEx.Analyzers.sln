@@ -11,28 +11,43 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Package",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Test", "BepInEx.Analyzers\BepInEx.Analyzers.Test\BepInEx.Analyzers.Test.csproj", "{44F9C392-E6B4-407A-82A4-4A24035F932A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Vsix", "BepInEx.Analyzers\BepInEx.Analyzers.Vsix\BepInEx.Analyzers.Vsix.csproj", "{964763B1-1A84-4E53-B39E-E9048E0676E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Nuget|Any CPU = Nuget|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Nuget|Any CPU.ActiveCfg = Nuget|Any CPU
+		{1D35AC68-EA51-4EAA-9E38-FB04A69B7448}.Nuget|Any CPU.Build.0 = Nuget|Any CPU
 		{04871F5E-22CC-4582-A782-0325AC03084E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04871F5E-22CC-4582-A782-0325AC03084E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04871F5E-22CC-4582-A782-0325AC03084E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04871F5E-22CC-4582-A782-0325AC03084E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04871F5E-22CC-4582-A782-0325AC03084E}.Nuget|Any CPU.ActiveCfg = Nuget|Any CPU
+		{04871F5E-22CC-4582-A782-0325AC03084E}.Nuget|Any CPU.Build.0 = Nuget|Any CPU
 		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Nuget|Any CPU.ActiveCfg = Nuget|Any CPU
+		{1849828F-70E2-4044-B11E-0F74DF38FAAA}.Nuget|Any CPU.Build.0 = Nuget|Any CPU
 		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Nuget|Any CPU.ActiveCfg = Nuget|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Nuget|Any CPU.ActiveCfg = Nuget|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

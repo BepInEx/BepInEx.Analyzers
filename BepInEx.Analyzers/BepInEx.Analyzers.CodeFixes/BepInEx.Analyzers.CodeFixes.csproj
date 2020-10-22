@@ -4,6 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>BepInEx.Analyzers</RootNamespace>
+    <Configurations>Debug;Release;Nuget</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Nuget' ">
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

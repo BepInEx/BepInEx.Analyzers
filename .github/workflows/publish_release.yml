@@ -40,6 +40,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./BepInEx.Analyzers/BepInEx.Analyzers.Package/bin/Release/BepInEx.Analyzers.${{ steps.get_version.outputs.version_num }}.nupkg
+        asset_path: ./BepInEx.Analyzers/BepInEx.Analyzers.Package/bin/Nuget/BepInEx.Analyzers.${{ steps.get_version.outputs.version_num }}.nupkg
         asset_name: BepInEx.Analyzers.${{ steps.get_version.outputs.version_num }}.nupkg
         asset_content_type: application/zip
