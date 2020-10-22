@@ -3,8 +3,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
-using System.Linq;
-using static BepInEx.Analyzers.Shared;
 
 namespace BepInEx.Analyzers
 {
@@ -29,13 +27,14 @@ namespace BepInEx.Analyzers
             context.RegisterSyntaxNodeAction(AnalyzeMethodDeclaration, SyntaxKind.MethodDeclaration);
         }
 
-        private static void AnalyzeMethodDeclaration(SyntaxNodeAnalysisContext context)
+        private void AnalyzeMethodDeclaration(SyntaxNodeAnalysisContext context)
         {
             var method = (MethodDeclarationSyntax)context.Node;
-            if (method.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword))
+
+            if(method.IsStatic())
                 return;
 
-            if (!HasHarmonyAttributes(method))
+            if(!method.HasAttribute(context.SemanticModel, context.CancellationToken, "HarmonyLib.HarmonyPatch"))
                 return;
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, method.Identifier.GetLocation(), method.Identifier));

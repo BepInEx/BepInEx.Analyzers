@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 using System.Linq;
-using static BepInEx.Analyzers.Shared;
 
 namespace BepInEx.Analyzers
 {
@@ -29,6 +28,7 @@ namespace BepInEx.Analyzers
         {
             Location location = diagnostic.Location;
             SyntaxTree sourceTree = location.SourceTree;
+            SemanticModel semanticModel = context.GetSemanticModel(sourceTree);
             SyntaxNode root = sourceTree.GetRoot(context.CancellationToken);
             SyntaxNode node = root.FindNode(location.SourceSpan);
 
@@ -36,15 +36,15 @@ namespace BepInEx.Analyzers
                 return;
 
             //Check if the method or the class containing the method has Harmony related attributes
-            bool hasHarmonyAttributes = HasHarmonyAttributes(method);
+            bool hasHarmonyAttributes = method.HasAttribute(semanticModel, context.CancellationToken, "HarmonyLib.HarmonyPatch");
             if (!hasHarmonyAttributes)
                 if (method.Parent is ClassDeclarationSyntax classDeclaration)
-                    if (HasHarmonyAttributes(classDeclaration))
+                    if (method.HasAttribute(semanticModel, context.CancellationToken, "HarmonyLib.HarmonyPatch"))
                         hasHarmonyAttributes = true;
             if (!hasHarmonyAttributes)
                 return;
 
-            foreach (var descriptor in SupportedSuppressions.Where(d => d.SuppressedDiagnosticId == diagnostic.Id))
+            foreach(var descriptor in SupportedSuppressions.Where(d => d.SuppressedDiagnosticId == diagnostic.Id))
                 context.ReportSuppression(Suppression.Create(descriptor, diagnostic));
         }
     }

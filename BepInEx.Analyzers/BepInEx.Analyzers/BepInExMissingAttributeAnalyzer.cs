@@ -27,13 +27,17 @@ namespace BepInEx.Analyzers
             context.RegisterSyntaxNodeAction(AnalyzeClassDeclaration, SyntaxKind.ClassDeclaration);
         }
 
-        private static void AnalyzeClassDeclaration(SyntaxNodeAnalysisContext context)
+        private void AnalyzeClassDeclaration(SyntaxNodeAnalysisContext context)
         {
-            if(!context.HasAttribute("BepInEx.BepInPlugin") && context.InheritsFrom("BepInEx.BaseUnityPlugin"))
-            {
-                var classDeclaration = (ClassDeclarationSyntax)context.Node;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));
-            }
+            var classDeclaration = (ClassDeclarationSyntax)context.Node;
+
+            if(classDeclaration.HasAttribute(context.SemanticModel, context.CancellationToken, "BepInEx.BepInPlugin"))
+                return;
+
+            if(!classDeclaration.InheritsFrom(context.SemanticModel, context.CancellationToken, "BepInEx.BaseUnityPlugin"))
+                return;
+
+            context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));
         }
     }
 }

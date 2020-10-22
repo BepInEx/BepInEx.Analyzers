@@ -1,6 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
+using System.Linq;
+using System.Threading;
 
 namespace BepInEx.Analyzers
 {
@@ -22,9 +24,9 @@ namespace BepInEx.Analyzers
                 return symbol.OriginalDefinition as T;
         }
 
-        public static bool InheritsFrom(this SyntaxNodeAnalysisContext context, string typeName)
+        public static bool InheritsFrom(this ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel, CancellationToken cancellationToken, string typeName)
         {
-            var symbol = context.SemanticModel.GetRawSymbol<INamedTypeSymbol>(context.Node);
+            var symbol = semanticModel.GetDeclaredSymbol(classDeclaration, cancellationToken);
 
             while(true)
             {
@@ -45,17 +47,22 @@ namespace BepInEx.Analyzers
             return false;
         }
 
-        public static bool HasAttribute(this SyntaxNodeAnalysisContext context, string typeName)
+        public static bool HasAttribute(this MemberDeclarationSyntax memberDeclaration, SemanticModel semanticModel, CancellationToken cancellationToken, string typeName)
         {
-            foreach(var attributeList in ((ClassDeclarationSyntax)context.Node).AttributeLists)
+            foreach(var attributeList in memberDeclaration.AttributeLists)
                 foreach(var attribute in attributeList.Attributes)
                 {
-                    var symbol = context.SemanticModel.GetRawSymbol<ISymbol>(attribute);
-                    if(symbol.ContainingType.ToString() == typeName)
+                    var symbol = semanticModel.GetSymbolInfo(attribute, cancellationToken).Symbol;
+                    if(symbol != null && symbol.ContainingType.ToString() == typeName)
                         return true;
                 }
 
             return false;
+        }
+
+        public static bool IsStatic(this MethodDeclarationSyntax methodDeclaration)
+        {
+            return methodDeclaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
         }
     }
 }
