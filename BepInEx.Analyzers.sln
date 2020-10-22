@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Package",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Test", "BepInEx.Analyzers\BepInEx.Analyzers.Test\BepInEx.Analyzers.Test.csproj", "{44F9C392-E6B4-407A-82A4-4A24035F932A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Analyzers.Vsix", "BepInEx.Analyzers\BepInEx.Analyzers.Vsix\BepInEx.Analyzers.Vsix.csproj", "{964763B1-1A84-4E53-B39E-E9048E0676E9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44F9C392-E6B4-407A-82A4-4A24035F932A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{964763B1-1A84-4E53-B39E-E9048E0676E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

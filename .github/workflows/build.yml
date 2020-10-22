@@ -1,0 +1,42 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Azure Credentials provider
+      shell: pwsh
+      run: |
+        iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) }"
+        nuget sources add -Name ${{ secrets.BEPIN_NUGET_SOURCE_NAME }} -Source  ${{ secrets.BEPIN_NUGET_SOURCE }} -username ${{ secrets.BEPIN_NUGET_USERNAME }} -password ${{ secrets.BEPIN_NUGET_PAT }}
+
+    - name: Make repo pushable
+      env:
+        GITHUB_USER: ${{ secrets.BEPIN_BOT_USER }}
+        GITHUB_PAT: ${{ secrets.BEPIN_BOT_PAT }}
+      shell: bash
+      run: git remote set-url --push origin https://$GITHUB_USER:$GITHUB_PAT@github.com/$GITHUB_REPOSITORY.git
+      
+    - name: Run build script
+      run: ./build.ps1 -Target Build
+      
+    - name: Create a release tag
+      if: github.ref == 'refs/heads/master'
+      env:
+        NUGET_KEY: az
+        NUGET_NAME: ${{ secrets.BEPIN_NUGET_SOURCE_NAME }}
+      run: ./build.ps1 -Target Publish -ScriptArgs "-nugetKey=""${env:NUGET_KEY}"" -nugetSource=""${env:NUGET_NAME}"""
+      
+    - name: Get target file
+      id: getfilename
+      shell: bash
+      run: echo "::set-output name=file::$(ls ./BepInEx.Analyzers/BepInEx.Analyzers.Package/bin/Release/BepInEx.Analyzers*.nupkg)"
+      
+    - uses: actions/upload-artifact@v1
+      with:
+        path: ${{ steps.getfilename.outputs.file }}
+        name: BepInEx.Analyzers
