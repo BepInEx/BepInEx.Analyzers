@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BepInExMissingAttributeAnalyzerDescription" xml:space="preserve">
-    <value>Classes inheriting from BaseUnityPlugin must have a BepInPlugin attribute.</value>
+    <value>Classes inheriting from BaseUnityPlugin should have a BepInPlugin attribute.</value>
   </data>
   <data name="BepInExMissingAttributeAnalyzerMessageFormat" xml:space="preserve">
-    <value>Class {0} inheriting from BaseUnityPlugin must have a BepInPlugin attribute</value>
+    <value>Class {0} inheriting from BaseUnityPlugin should have a BepInPlugin attribute</value>
   </data>
   <data name="BepInExMissingAttributeAnalyzerTitle" xml:space="preserve">
     <value>Class inheriting from BaseUnityPlugin missing BepInPlugin attribute</value>

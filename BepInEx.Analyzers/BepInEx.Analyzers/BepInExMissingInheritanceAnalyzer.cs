@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
-using static BepInEx.Analyzers.Shared;
 
 namespace BepInEx.Analyzers
 {
@@ -28,17 +27,13 @@ namespace BepInEx.Analyzers
             context.RegisterSyntaxNodeAction(AnalyzeClassDeclaration, SyntaxKind.ClassDeclaration);
         }
 
-        private static void AnalyzeClassDeclaration(SyntaxNodeAnalysisContext context)
+        private void AnalyzeClassDeclaration(SyntaxNodeAnalysisContext context)
         {
-            var classDeclaration = (ClassDeclarationSyntax)context.Node;
-
-            if (!HasBepInPluginAttribute(classDeclaration))
-                return;
-
-            if (DerivesFromBaseUnityPlugin(classDeclaration))
-                return;
-
-            context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));
+            if(context.HasAttribute("BepInEx.BepInPlugin") && !context.InheritsFrom("BepInEx.BaseUnityPlugin"))
+            {
+                var classDeclaration = (ClassDeclarationSyntax)context.Node;
+                context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));
+            }
         }
     }
 }

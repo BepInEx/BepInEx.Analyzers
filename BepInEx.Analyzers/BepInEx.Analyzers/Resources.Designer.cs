@@ -61,7 +61,7 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Classes inheriting from BaseUnityPlugin must have a BepInPlugin attribute..
+        ///   Looks up a localized string similar to Classes inheriting from BaseUnityPlugin should have a BepInPlugin attribute..
         /// </summary>
         internal static string BepInExMissingAttributeAnalyzerDescription {
             get {
@@ -70,7 +70,7 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class {0} inheriting from BaseUnityPlugin must have a BepInPlugin attribute.
+        ///   Looks up a localized string similar to Class {0} inheriting from BaseUnityPlugin should have a BepInPlugin attribute.
         /// </summary>
         internal static string BepInExMissingAttributeAnalyzerMessageFormat {
             get {
