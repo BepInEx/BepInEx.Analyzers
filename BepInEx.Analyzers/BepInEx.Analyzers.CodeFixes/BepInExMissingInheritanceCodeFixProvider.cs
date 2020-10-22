@@ -11,7 +11,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace BepInEx.Analyzers
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(HarmonyStaticMethodCodeFixProvider)), Shared]
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(BepInExMissingInheritanceCodeFixProvider)), Shared]
     public class BepInExMissingInheritanceCodeFixProvider : CodeFixProvider
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(BepInExMissingInheritanceAnalyzer.DiagnosticId);
