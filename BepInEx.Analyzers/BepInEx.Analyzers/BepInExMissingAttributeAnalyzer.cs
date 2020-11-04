@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace BepInEx.Analyzers
 {
@@ -16,7 +17,7 @@ namespace BepInEx.Analyzers
         private static readonly LocalizableString Description = new LocalizableResourceString(nameof(Resources.BepInExMissingAttributeAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private const string Category = "Class Declaration";
 
-        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Info, true, Description);
+        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true, Description);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -30,11 +31,15 @@ namespace BepInEx.Analyzers
         private void AnalyzeClassDeclaration(SyntaxNodeAnalysisContext context)
         {
             var classDeclaration = (ClassDeclarationSyntax)context.Node;
+            var symbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration, context.CancellationToken);
 
-            if(classDeclaration.HasAttribute(context.SemanticModel, context.CancellationToken, "BepInEx.BepInPlugin"))
+            if(symbol.HasAttribute(TypeNames.BepInPlugin))
                 return;
 
-            if(!classDeclaration.InheritsFrom(context.SemanticModel, context.CancellationToken, "BepInEx.BaseUnityPlugin"))
+            if(!symbol.InheritsFrom(TypeNames.BaseUnityPlugin))
+                return;
+
+            if(context.Compilation.Assembly.GlobalNamespace.GetAllTypes().Any(x => x.InheritsFrom(symbol.ToString()) && x.HasAttribute(TypeNames.BepInPlugin)))
                 return;
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));

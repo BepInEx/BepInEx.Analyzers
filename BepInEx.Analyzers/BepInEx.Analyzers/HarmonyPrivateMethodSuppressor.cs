@@ -35,11 +35,13 @@ namespace BepInEx.Analyzers
             if (!(node is MethodDeclarationSyntax method))
                 return;
 
+            var symbol = semanticModel.GetDeclaredSymbol(method, context.CancellationToken);
+
             //Check if the method or the class containing the method has Harmony related attributes
-            bool hasHarmonyAttributes = method.HasAttribute(semanticModel, context.CancellationToken, "HarmonyLib.HarmonyPatch");
+            bool hasHarmonyAttributes = symbol.HasAttribute(TypeNames.HarmonyPatch);
             if (!hasHarmonyAttributes)
                 if (method.Parent is ClassDeclarationSyntax classDeclaration)
-                    if (method.HasAttribute(semanticModel, context.CancellationToken, "HarmonyLib.HarmonyPatch"))
+                    if (symbol.HasAttribute(TypeNames.HarmonyPatch))
                         hasHarmonyAttributes = true;
             if (!hasHarmonyAttributes)
                 return;

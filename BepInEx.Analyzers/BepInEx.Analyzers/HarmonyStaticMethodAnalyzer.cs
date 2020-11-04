@@ -30,11 +30,12 @@ namespace BepInEx.Analyzers
         private void AnalyzeMethodDeclaration(SyntaxNodeAnalysisContext context)
         {
             var method = (MethodDeclarationSyntax)context.Node;
+            var symbol = context.SemanticModel.GetDeclaredSymbol(method, context.CancellationToken);
 
             if(method.IsStatic())
                 return;
 
-            if(!method.HasAttribute(context.SemanticModel, context.CancellationToken, "HarmonyLib.HarmonyPatch"))
+            if(!symbol.HasAttribute(TypeNames.HarmonyPatch))
                 return;
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, method.Identifier.GetLocation(), method.Identifier));

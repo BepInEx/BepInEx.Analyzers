@@ -30,11 +30,12 @@ namespace BepInEx.Analyzers
         private void AnalyzeClassDeclaration(SyntaxNodeAnalysisContext context)
         {
             var classDeclaration = (ClassDeclarationSyntax)context.Node;
+            var symbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration, context.CancellationToken);
 
-            if(!classDeclaration.HasAttribute(context.SemanticModel, context.CancellationToken, "BepInEx.BepInPlugin"))
+            if(!symbol.HasAttribute(TypeNames.BepInPlugin))
                 return;
 
-            if(classDeclaration.InheritsFrom(context.SemanticModel, context.CancellationToken, "BepInEx.BaseUnityPlugin"))
+            if(symbol.InheritsFrom(TypeNames.BaseUnityPlugin))
                 return;
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));
