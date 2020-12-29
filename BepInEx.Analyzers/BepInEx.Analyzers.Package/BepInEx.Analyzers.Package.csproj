@@ -11,7 +11,7 @@
 
   <PropertyGroup>
     <PackageId>BepInEx.Analyzers</PackageId>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.0.4</PackageVersion>
     <Authors>BepInEx</Authors>
     <PackageProjectUrl>https://github.com/BepInEx/BepInEx.Analyzers</PackageProjectUrl>
     <PackageIconUrl>https://avatars2.githubusercontent.com/u/39589027</PackageIconUrl>
@@ -21,6 +21,7 @@
     <Copyright>Copyright</Copyright>
     <PackageTags>BepInEx.Analyzers, BepInEx, analyzers</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
+    <DevelopmentDependency>true</DevelopmentDependency>
 
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
 
