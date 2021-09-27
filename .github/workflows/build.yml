@@ -24,7 +24,7 @@ jobs:
       env:
         NUGET_KEY: ${{ secrets.BEPIN_DEV_NUGET_KEY }}
         NUGET_NAME: ${{ secrets.BEPIN_DEV_NUGET_SOURCE }}
-      run: ./build.ps1 --target=Publish --nugetKey="${env:NUGET_KEY}" -nugetSource="${env:NUGET_NAME}"
+      run: ./build.ps1 --target=Publish --nugetKey="${env:NUGET_KEY}" --nugetSource="${env:NUGET_NAME}"
       
     - name: Get target file
       id: getfilename
