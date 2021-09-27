@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccessPublicizedMemberAnalyzerDescription" xml:space="preserve">
+    <value>Accessing a member that was not originally public</value>
+  </data>
+  <data name="AccessPublicizedMemberAnalyzerMessageFormat" xml:space="preserve">
+    <value>Forced access of {0} can lead to unintended behavior. Check for public members first.</value>
+  </data>
+  <data name="AccessPublicizedMemberAnalyzerTitle" xml:space="preserve">
+    <value>Accessing a member that was not originally public</value>
+  </data>
   <data name="BepInExMissingAttributeAnalyzerDescription" xml:space="preserve">
     <value>Classes inheriting from BaseUnityPlugin should have a BepInPlugin attribute.</value>
   </data>

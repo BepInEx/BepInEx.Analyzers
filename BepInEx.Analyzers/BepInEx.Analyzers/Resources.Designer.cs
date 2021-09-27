@@ -61,6 +61,33 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accessing a member that was not originally public.
+        /// </summary>
+        internal static string AccessPublicizedMemberAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("AccessPublicizedMemberAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forced access of {0} can lead to unintended behavior. Check for public members first..
+        /// </summary>
+        internal static string AccessPublicizedMemberAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("AccessPublicizedMemberAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accessing a member that was not originally public.
+        /// </summary>
+        internal static string AccessPublicizedMemberAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("AccessPublicizedMemberAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Classes inheriting from BaseUnityPlugin should have a BepInPlugin attribute..
         /// </summary>
         internal static string BepInExMissingAttributeAnalyzerDescription {
