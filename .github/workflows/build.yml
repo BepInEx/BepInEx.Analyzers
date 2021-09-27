@@ -7,13 +7,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Install Azure Credentials provider
-      shell: pwsh
-      run: |
-        iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) }"
-        nuget sources add -Name ${{ secrets.BEPIN_NUGET_SOURCE_NAME }} -Source  ${{ secrets.BEPIN_NUGET_SOURCE }} -username ${{ secrets.BEPIN_NUGET_USERNAME }} -password ${{ secrets.BEPIN_NUGET_PAT }}
-
     - name: Make repo pushable
       env:
         GITHUB_USER: ${{ secrets.BEPIN_BOT_USER }}
@@ -22,14 +15,14 @@ jobs:
       run: git remote set-url --push origin https://$GITHUB_USER:$GITHUB_PAT@github.com/$GITHUB_REPOSITORY.git
       
     - name: Run build script
-      run: ./build.ps1 -Target Build
+      run: ./build.ps1 --target=Build
       
     - name: Create a release tag
       if: github.ref == 'refs/heads/main'
       env:
-        NUGET_KEY: az
-        NUGET_NAME: ${{ secrets.BEPIN_NUGET_SOURCE_NAME }}
-      run: ./build.ps1 -Target Publish -ScriptArgs "-nugetKey=""${env:NUGET_KEY}"" -nugetSource=""${env:NUGET_NAME}"""
+        NUGET_KEY: ${{ secrets.BEPIN_DEV_NUGET_KEY }}
+        NUGET_NAME: ${{ secrets.BEPIN_DEV_NUGET_SOURCE }}
+      run: ./build.ps1 --target=Publish --nugetKey="${env:NUGET_KEY}" -nugetSource="${env:NUGET_NAME}"
       
     - name: Get target file
       id: getfilename
