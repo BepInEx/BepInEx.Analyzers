@@ -11,7 +11,7 @@
 
   <PropertyGroup>
     <PackageId>BepInEx.Analyzers</PackageId>
-    <PackageVersion>1.0.4</PackageVersion>
+    <PackageVersion>1.0.5</PackageVersion>
     <Authors>BepInEx</Authors>
     <PackageProjectUrl>https://github.com/BepInEx/BepInEx.Analyzers</PackageProjectUrl>
     <PackageIconUrl>https://avatars2.githubusercontent.com/u/39589027</PackageIconUrl>
