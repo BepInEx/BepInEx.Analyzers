@@ -33,13 +33,35 @@ namespace BepInEx.Analyzers
             var memberAccess = (MemberAccessExpressionSyntax)context.Node;
             var symbol = context.SemanticModel.GetSymbolInfo(memberAccess.Name, context.CancellationToken).Symbol;
 
+            if (symbol == null)
+                return;
+
+            if (IsContextInheritingFromPublicizedType(symbol.ContainingType, context))
+                return;
+
             if (IsPublicized(symbol))
             {
                 context.ReportDiagnostic(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier));
             }
         }
 
+        private static bool IsContextInheritingFromPublicizedType(INamedTypeSymbol containingType, SyntaxNodeAnalysisContext context)
+        {
+            var contextBaseType = context.ContainingSymbol.ContainingType?.BaseType;
+            while (contextBaseType != null)
+            {
+                if (SymbolEqualityComparer.Default.Equals(containingType, contextBaseType))
+                {
+                    return true;
+                }
+
+                contextBaseType = contextBaseType.BaseType;
+            }
+
+            return false;
+        }
+
         private static bool IsPublicized(ISymbol symbol) =>
-            symbol != null && symbol.HasAttribute(PublicizedAttributeName);
+            symbol.HasAttribute(PublicizedAttributeName);
     }
 }
