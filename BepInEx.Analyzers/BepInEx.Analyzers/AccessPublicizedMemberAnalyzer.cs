@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace BepInEx.Analyzers
 {
@@ -19,6 +20,7 @@ namespace BepInEx.Analyzers
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
+        // https://github.com/BepInEx/UnityDataMiner/blob/master/UnityDataMiner/AssemblyStripper.cs
         private const string PublicizedAttributeName = "System.Runtime.CompilerServices.PublicizedAttribute";
 
         public override void Initialize(AnalysisContext context)
@@ -36,13 +38,13 @@ namespace BepInEx.Analyzers
             if (symbol == null)
                 return;
 
+            if (!IsPrivateAndPublicized(symbol))
+                return;
+
             if (IsContextInheritingFromPublicizedType(symbol.ContainingType, context))
                 return;
 
-            if (IsPublicized(symbol))
-            {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier));
-            }
+            context.ReportDiagnostic(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier));
         }
 
         private static bool IsContextInheritingFromPublicizedType(INamedTypeSymbol containingType, SyntaxNodeAnalysisContext context)
@@ -61,7 +63,14 @@ namespace BepInEx.Analyzers
             return false;
         }
 
-        private static bool IsPublicized(ISymbol symbol) =>
-            symbol.HasAttribute(PublicizedAttributeName);
+        private static bool IsPrivateAndPublicized(ISymbol symbol)
+        {
+            var publicizedAttribute = symbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Name == PublicizedAttributeName);
+            if (publicizedAttribute == null)
+                return false;
+
+            var accessibility = (Accessibility)publicizedAttribute.ConstructorArguments[0].Value;
+            return accessibility == Accessibility.Private;
+        }
     }
 }
