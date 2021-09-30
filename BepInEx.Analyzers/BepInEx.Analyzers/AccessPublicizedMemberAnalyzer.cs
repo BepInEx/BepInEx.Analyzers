@@ -9,6 +9,18 @@ namespace BepInEx.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class AccessPublicizedMemberAnalyzer : DiagnosticAnalyzer
     {
+        private enum AccessModifier
+        {
+            Protected = 1,
+            PrivateOrInternal = 2
+        }
+
+        private static bool IsPrivate(AccessModifier accessibility) =>
+            accessibility == AccessModifier.PrivateOrInternal;
+
+        private static bool IsProtected(AccessModifier accessibility) =>
+            accessibility == AccessModifier.Protected;
+
         public const string DiagnosticId = "Publicizer001";
 
         private static readonly LocalizableString Title = new LocalizableResourceString(nameof(Resources.AccessPublicizedMemberAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
@@ -33,43 +45,71 @@ namespace BepInEx.Analyzers
         {
             var memberAccess = (MemberAccessExpressionSyntax)context.Node;
             var symbol = context.SemanticModel.GetSymbolInfo(memberAccess.Name, context.CancellationToken).Symbol;
-
+            
             if (symbol == null)
                 return;
 
-            if (!IsPrivateAndPublicized(symbol))
-                return;
-
-            if (IsContextInheritingFromPublicizedType(symbol.ContainingType, context))
-                return;
-
-            context.ReportDiagnostic(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier));
+            if (symbol is IPropertySymbol propertySymbol)
+            {
+                var propertyUsage = context.Node.GetPropertyUsage();
+                if (propertyUsage == Extensions.PropertyUsage.Get || propertyUsage == Extensions.PropertyUsage.GetAndSet)
+                {
+                    var getMethodPublicizedAttribute = propertySymbol.GetMethod.GetAttribute(PublicizedAttributeName);
+                    if (getMethodPublicizedAttribute != null)
+                    {
+                        var accessibility = GetAccessModifier(getMethodPublicizedAttribute);
+                        Check(accessibility, symbol, context, memberAccess);
+                    }
+                }
+                else
+                {
+                    var setMethodPublicizedAttribute = propertySymbol.SetMethod.GetAttribute(PublicizedAttributeName);
+                    if (setMethodPublicizedAttribute != null)
+                    {
+                        var accessibility = GetAccessModifier(setMethodPublicizedAttribute);
+                        Check(accessibility, symbol, context, memberAccess);
+                    }
+                }
+            }
+            else
+            {
+                var publicizedAttribute = symbol.GetAttribute(PublicizedAttributeName);
+                if (publicizedAttribute != null)
+                {
+                    var accessibility = GetAccessModifier(publicizedAttribute);
+                    Check(accessibility, symbol, context, memberAccess);
+                }
+            }
         }
 
-        private static bool IsContextInheritingFromPublicizedType(INamedTypeSymbol containingType, SyntaxNodeAnalysisContext context)
+        private static AccessModifier GetAccessModifier(AttributeData publicizedAttribute)
+        {
+            return (AccessModifier)publicizedAttribute.ConstructorArguments[0].Value;
+        }
+
+        private static void Check(AccessModifier accessibility, ISymbol symbol, SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess)
+        {
+            if (IsPrivate(accessibility) ||
+                    (IsProtected(accessibility) && IsUsedOutsideClassDefinition(symbol.ContainingType, context)))
+            {
+                context.ReportDiagnostic(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier));
+            }
+        }
+
+        private static bool IsUsedOutsideClassDefinition(INamedTypeSymbol containingType, SyntaxNodeAnalysisContext context)
         {
             var contextBaseType = context.ContainingSymbol.ContainingType?.BaseType;
             while (contextBaseType != null)
             {
                 if (SymbolEqualityComparer.Default.Equals(containingType, contextBaseType))
                 {
-                    return true;
+                    return false;
                 }
 
                 contextBaseType = contextBaseType.BaseType;
             }
 
-            return false;
-        }
-
-        private static bool IsPrivateAndPublicized(ISymbol symbol)
-        {
-            var publicizedAttribute = symbol.GetAttribute(PublicizedAttributeName);
-            if (publicizedAttribute == null)
-                return false;
-
-            var accessibility = (Accessibility)publicizedAttribute.ConstructorArguments[0].Value;
-            return accessibility == Accessibility.Private;
+            return true;
         }
     }
 }
