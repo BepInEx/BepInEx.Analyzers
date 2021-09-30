@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
-using System.Linq;
 
 namespace BepInEx.Analyzers
 {
@@ -65,7 +64,7 @@ namespace BepInEx.Analyzers
 
         private static bool IsPrivateAndPublicized(ISymbol symbol)
         {
-            var publicizedAttribute = symbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Name == PublicizedAttributeName);
+            var publicizedAttribute = symbol.GetAttribute(PublicizedAttributeName);
             if (publicizedAttribute == null)
                 return false;
 
