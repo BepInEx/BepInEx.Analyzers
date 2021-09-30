@@ -87,6 +87,11 @@ namespace BepInEx.Analyzers
             return symbol.GetAttributes().Any(x => x.AttributeClass.ToString() == typeName);
         }
 
+        public static AttributeData GetAttribute(this ISymbol symbol, string typeName)
+        {
+            return symbol.GetAttributes().FirstOrDefault(x => x.AttributeClass.ToString() == typeName);
+        }
+
         public static bool IsStatic(this MethodDeclarationSyntax methodDeclaration)
         {
             return methodDeclaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
