@@ -2,6 +2,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using System;
 using System.Collections.Immutable;
 
 namespace BepInEx.Analyzers
@@ -55,30 +56,27 @@ namespace BepInEx.Analyzers
                 if (propertyUsage == Extensions.PropertyUsage.Get || propertyUsage == Extensions.PropertyUsage.GetAndSet)
                 {
                     var getMethodPublicizedAttribute = propertySymbol.GetMethod.GetAttribute(PublicizedAttributeName);
-                    if (getMethodPublicizedAttribute != null)
-                    {
-                        var accessibility = GetAccessModifier(getMethodPublicizedAttribute);
-                        Check(accessibility, symbol, context, memberAccess);
-                    }
+                    Check(getMethodPublicizedAttribute, symbol, context, memberAccess);
                 }
                 else
                 {
                     var setMethodPublicizedAttribute = propertySymbol.SetMethod.GetAttribute(PublicizedAttributeName);
-                    if (setMethodPublicizedAttribute != null)
-                    {
-                        var accessibility = GetAccessModifier(setMethodPublicizedAttribute);
-                        Check(accessibility, symbol, context, memberAccess);
-                    }
+                    Check(setMethodPublicizedAttribute, symbol, context, memberAccess);
                 }
             }
             else
             {
                 var publicizedAttribute = symbol.GetAttribute(PublicizedAttributeName);
-                if (publicizedAttribute != null)
-                {
-                    var accessibility = GetAccessModifier(publicizedAttribute);
-                    Check(accessibility, symbol, context, memberAccess);
-                }
+                Check(publicizedAttribute, symbol, context, memberAccess);
+            }
+        }
+
+        private void Check(AttributeData attribute, ISymbol symbol, SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess)
+        {
+            if (attribute != null)
+            {
+                var accessibility = GetAccessModifier(attribute);
+                Check(accessibility, symbol, context, memberAccess);
             }
         }
 
