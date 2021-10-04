@@ -32,7 +32,7 @@ namespace BepInEx.Analyzers
             var attribute = (AttributeSyntax)context.Node;
 
             var symbol = context.SemanticModel.GetSymbolInfo(attribute, context.CancellationToken).Symbol;
-            if (symbol != null && attribute.ArgumentList != null && symbol.ContainingType?.ToString() == "HarmonyLib.HarmonyPatch")
+            if (symbol != null && attribute.ArgumentList != null && symbol.ContainingType?.ToString() == TypeNames.HarmonyPatch)
             {
                 foreach (var argument in attribute.ArgumentList.Arguments)
                 {
