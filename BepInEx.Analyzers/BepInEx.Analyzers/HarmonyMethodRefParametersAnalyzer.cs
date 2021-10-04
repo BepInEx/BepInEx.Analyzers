@@ -34,7 +34,7 @@ namespace BepInEx.Analyzers
             var method = (MethodDeclarationSyntax)context.Node;
             var symbol = context.SemanticModel.GetDeclaredSymbol(method, context.CancellationToken);
 
-            if (!HarmonyUtil.IsMethodHarmonyRelated(ref context, method, symbol))
+            if (!HarmonyUtil.IsMethodHarmonyPatchRelated(ref context, method, symbol))
                 return;
 
             if (method.ParameterList?.Parameters.Count <= 0)

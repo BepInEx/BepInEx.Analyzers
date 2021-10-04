@@ -37,7 +37,7 @@ namespace BepInEx.Analyzers
 
             var symbol = semanticModel.GetDeclaredSymbol(method, context.CancellationToken);
 
-            if (!HarmonyUtil.IsMethodHarmonyRelated(ref context, semanticModel, method, symbol))
+            if (!HarmonyUtil.IsMethodHarmonyPatchRelated(ref context, semanticModel, method, symbol))
                 return;
 
             foreach(var descriptor in SupportedSuppressions.Where(d => d.SuppressedDiagnosticId == diagnostic.Id))
