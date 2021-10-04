@@ -142,7 +142,7 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Harmony non-ref patch parameter modified.
+        ///   Looks up a localized string similar to Harmony non-ref patch parameter modified. This assignment have no effect..
         /// </summary>
         internal static string HarmonyMethodRefParametersAnalyzerDescription {
             get {
@@ -151,7 +151,7 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Harmony non-ref patch parameter {0} modified.
+        ///   Looks up a localized string similar to Harmony non-ref patch parameter {0} modified. This assignment have no effect..
         /// </summary>
         internal static string HarmonyMethodRefParametersAnalyzerMessageFormat {
             get {

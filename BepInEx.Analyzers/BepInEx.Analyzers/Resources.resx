@@ -145,10 +145,10 @@
     <value>Classes with BepInPlugin attribute must inherit from BaseUnityPlugin</value>
   </data>
   <data name="HarmonyMethodRefParametersAnalyzerDescription" xml:space="preserve">
-    <value>Harmony non-ref patch parameter modified</value>
+    <value>Harmony non-ref patch parameter modified. This assignment have no effect.</value>
   </data>
   <data name="HarmonyMethodRefParametersAnalyzerMessageFormat" xml:space="preserve">
-    <value>Harmony non-ref patch parameter {0} modified</value>
+    <value>Harmony non-ref patch parameter {0} modified. This assignment have no effect.</value>
   </data>
   <data name="HarmonyMethodRefParametersAnalyzerTitle" xml:space="preserve">
     <value>Harmony non-ref patch parameters modified</value>
