@@ -142,6 +142,33 @@ namespace BepInEx.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Harmony non-ref patch parameter modified.
+        /// </summary>
+        internal static string HarmonyMethodRefParametersAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("HarmonyMethodRefParametersAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harmony non-ref patch parameter {0} modified.
+        /// </summary>
+        internal static string HarmonyMethodRefParametersAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("HarmonyMethodRefParametersAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harmony non-ref patch parameters modified.
+        /// </summary>
+        internal static string HarmonyMethodRefParametersAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("HarmonyMethodRefParametersAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Don&apos;t flag private methods with HarmonyPatch attribute as unused..
         /// </summary>
         internal static string HarmonyPrivateMethodSuppressorJustification {

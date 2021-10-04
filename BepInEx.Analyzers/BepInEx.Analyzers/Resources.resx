@@ -144,6 +144,15 @@
   <data name="BepInExMissingInheritanceAnalyzerTitle" xml:space="preserve">
     <value>Classes with BepInPlugin attribute must inherit from BaseUnityPlugin</value>
   </data>
+  <data name="HarmonyMethodRefParametersAnalyzerDescription" xml:space="preserve">
+    <value>Harmony non-ref patch parameter modified</value>
+  </data>
+  <data name="HarmonyMethodRefParametersAnalyzerMessageFormat" xml:space="preserve">
+    <value>Harmony non-ref patch parameter {0} modified</value>
+  </data>
+  <data name="HarmonyMethodRefParametersAnalyzerTitle" xml:space="preserve">
+    <value>Harmony non-ref patch parameters modified</value>
+  </data>
   <data name="HarmonyPrivateMethodSuppressorJustification" xml:space="preserve">
     <value>Don't flag private methods with HarmonyPatch attribute as unused.</value>
   </data>
