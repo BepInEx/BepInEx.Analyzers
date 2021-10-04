@@ -2,7 +2,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System;
 using System.Collections.Immutable;
 
 namespace BepInEx.Analyzers
@@ -12,15 +11,23 @@ namespace BepInEx.Analyzers
     {
         private enum AccessModifier
         {
-            Protected = 1,
-            PrivateOrInternal = 2
+            // Technically not used since public members don't get PublicizedMemberAttribute
+            Public = 0,
+            Private = 1,
+            Protected = 2,
+            Internal = 3,
+            ProtectedInternal = 4,
+            PrivateProtected = 5
         }
 
         private static bool IsPrivate(AccessModifier accessibility) =>
-            accessibility == AccessModifier.PrivateOrInternal;
+            accessibility == AccessModifier.Private ||
+            accessibility == AccessModifier.PrivateProtected ||
+            accessibility == AccessModifier.Internal;
 
         private static bool IsProtected(AccessModifier accessibility) =>
-            accessibility == AccessModifier.Protected;
+            accessibility == AccessModifier.Protected ||
+            accessibility == AccessModifier.ProtectedInternal;
 
         public const string DiagnosticId = "Publicizer001";
 
@@ -88,7 +95,7 @@ namespace BepInEx.Analyzers
         private static void Check(AccessModifier accessibility, ISymbol symbol, SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess)
         {
             if (IsPrivate(accessibility) ||
-                    (IsProtected(accessibility) && IsUsedOutsideClassDefinition(symbol.ContainingType, context)))
+               (IsProtected(accessibility) && IsUsedOutsideClassDefinition(symbol.ContainingType, context)))
             {
                 context.ReportDiagnostic(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier));
             }
