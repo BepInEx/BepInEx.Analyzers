@@ -2,6 +2,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -40,22 +42,33 @@ namespace BepInEx.Analyzers
             if (method.ParameterList?.Parameters.Count <= 0)
                 return;
 
+            var memberAccesses = context.Node.DescendantNodes().OfType<MemberAccessExpressionSyntax>();
+            var varNames = memberAccesses.Select(e => e.Expression.ToString()).ToList();
+            CheckExpressionSyntaxes(context, method, varNames, memberAccesses.Cast<ExpressionSyntax>().ToList());
+
             var assignments = context.Node.DescendantNodes().OfType<AssignmentExpressionSyntax>();
+            varNames = assignments.Select(e => e.Left.ToString()).ToList();
+            CheckExpressionSyntaxes(context, method, varNames, assignments.Cast<ExpressionSyntax>().ToList());
 
-            foreach (var assignment in assignments)
+            var accessesByIndex = context.Node.DescendantNodes().OfType<ElementAccessExpressionSyntax>();
+            varNames = accessesByIndex.Select(e => e.Expression.ToString()).ToList();
+            CheckExpressionSyntaxes(context, method, varNames, accessesByIndex.Cast<ExpressionSyntax>().ToList());
+        }
+
+        private static void CheckExpressionSyntaxes(SyntaxNodeAnalysisContext context, MethodDeclarationSyntax method,
+            List<string> varNames, List<ExpressionSyntax> expressionSyntaxes)
+        {
+            for (int i = 0; i < varNames.Count(); i++)
             {
-                var varName = assignment.Left.ToString();
-
                 foreach (var parameter in method.ParameterList.Parameters)
                 {
                     var parameterSplit = parameter.ToString().Split(' ');
-                    if (parameterSplit.Any(s => s == varName) && !parameterSplit.Any(s => s == "ref"))
+                    if (parameterSplit.Any(s => s == varNames[i]) && !parameterSplit.Any(s => s == "ref"))
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(Rule, assignment.GetLocation(), assignment.ToString()));
+                        context.ReportDiagnostic(Diagnostic.Create(Rule, expressionSyntaxes[i].GetLocation(), expressionSyntaxes[i].ToString()));
                     }
                 }
             }
-
         }
     }
 }
