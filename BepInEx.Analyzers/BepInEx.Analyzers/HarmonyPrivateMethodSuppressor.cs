@@ -37,13 +37,7 @@ namespace BepInEx.Analyzers
 
             var symbol = semanticModel.GetDeclaredSymbol(method, context.CancellationToken);
 
-            //Check if the method or the class containing the method has Harmony related attributes
-            bool hasHarmonyAttributes = symbol.HasAttribute(TypeNames.HarmonyPatch);
-            if (!hasHarmonyAttributes)
-                if (method.Parent is ClassDeclarationSyntax classDeclaration)
-                    if (symbol.HasAttribute(TypeNames.HarmonyPatch))
-                        hasHarmonyAttributes = true;
-            if (!hasHarmonyAttributes)
+            if (!HarmonyUtil.IsMethodHarmonyPatchRelated(ref context, semanticModel, method, symbol))
                 return;
 
             foreach(var descriptor in SupportedSuppressions.Where(d => d.SuppressedDiagnosticId == diagnostic.Id))

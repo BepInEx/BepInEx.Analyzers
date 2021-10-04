@@ -87,6 +87,11 @@ namespace BepInEx.Analyzers
             return symbol.GetAttributes().Any(x => x.AttributeClass.ToString() == typeName);
         }
 
+        public static AttributeData GetAttribute(this ISymbol symbol, string typeName)
+        {
+            return symbol.GetAttributes().FirstOrDefault(x => x.AttributeClass.ToString() == typeName);
+        }
+
         public static bool IsStatic(this MethodDeclarationSyntax methodDeclaration)
         {
             return methodDeclaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
@@ -109,6 +114,61 @@ namespace BepInEx.Analyzers
             foreach(var nestedType in type.GetTypeMembers()
                 .SelectMany(nestedType => GetNestedTypes(nestedType)))
                 yield return nestedType;
+        }
+
+        public enum PropertyUsage
+        {
+            Get,
+            Set,
+            GetAndSet
+        }
+
+        // https://github.com/dotnet/roslyn/issues/15527
+        // Allow to figure how the property was used,
+        // Through its getter, or setter, or both.
+        //
+        // ++/--    pre/postfix increments            get/set
+        // =        lhs of simple assignments         set
+        // +=, -=   lhs of other assigments           get/set
+        // x.y      rhs, of compound member access    recurr up
+        //
+        // any other use is just a get
+        //
+        // TOOD: ref parameters?
+        //
+        public static PropertyUsage GetPropertyUsage(this SyntaxNode node)
+        {
+            var kind = node.Parent.Kind();
+
+            if (kind == SyntaxKind.PostIncrementExpression ||
+                kind == SyntaxKind.PostDecrementExpression ||
+                kind == SyntaxKind.PreIncrementExpression ||
+                kind == SyntaxKind.PreDecrementExpression)
+            {
+                return PropertyUsage.GetAndSet;
+            }
+            else if (node.Parent is AssignmentExpressionSyntax)
+            {
+                var assignment = (AssignmentExpressionSyntax)(node.Parent);
+
+                if (assignment.Left == node)
+                {
+                    return kind == SyntaxKind.SimpleAssignmentExpression
+                        ? PropertyUsage.Set
+                        : PropertyUsage.GetAndSet;
+                }
+            }
+            else if (node.Parent is MemberAccessExpressionSyntax)
+            {
+                var m = (MemberAccessExpressionSyntax)(node.Parent);
+
+                if (m.Name == node)
+                {
+                    return node.Parent.GetPropertyUsage();
+                }
+            }
+
+            return PropertyUsage.Get;
         }
     }
 }
