@@ -71,7 +71,7 @@ namespace BepInEx.Analyzers
 
                     // TODO : Looking through the ToString() and "ref" is not the cleanest
                     var parameterSplit = parameter.ToString().Split(' ');
-                    if (parameterSplit.Any(s => s == varNames[i]) && !parameterSplit.Any(s => s == "ref"))
+                    if (parameterSplit.Any(s => s == varNames[i]) && !parameterSplit.Any(s => s == "ref" || s == "out"))
                     {
                         context.ReportDiagnostic(Diagnostic.Create(Rule, expressionSyntaxes[i].GetLocation(), expressionSyntaxes[i].ToString()));
                     }
