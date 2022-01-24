@@ -70,8 +70,8 @@ namespace BepInEx.Analyzers
                         }
                     }
 
-                    var paramaterName = parameterSymbol.Name;
-                    if (parameterSymbol.RefKind == RefKind.None && paramaterName == varNames[i])
+                    var parameterName = parameterSymbol.Name;
+                    if (parameterSymbol.RefKind == RefKind.None && parameterName == varNames[i])
                     {
                         context.ReportDiagnostic(Diagnostic.Create(Rule, expressionSyntaxes[i].GetLocation(), expressionSyntaxes[i].ToString()));
                     }
