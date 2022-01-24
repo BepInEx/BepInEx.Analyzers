@@ -61,7 +61,8 @@ namespace BepInEx.Analyzers
                 foreach (var parameter in method.ParameterList.Parameters)
                 {
                     // If parameter is a reference type and is not a literal assignment no warning needed
-                    if (context.SemanticModel.GetDeclaredSymbol(parameter, context.CancellationToken).Type.IsReferenceType)
+                    var parameterSymbol = context.SemanticModel.GetDeclaredSymbol(parameter, context.CancellationToken);
+                    if (parameterSymbol.Type.IsReferenceType)
                     {
                         if (!(expressionSyntaxes[i] is AssignmentExpressionSyntax assignment))
                         {
@@ -69,9 +70,8 @@ namespace BepInEx.Analyzers
                         }
                     }
 
-                    // TODO : Looking through the ToString() and "ref" is not the cleanest
-                    var parameterSplit = parameter.ToString().Split(' ');
-                    if (parameterSplit.Any(s => s == varNames[i]) && !parameterSplit.Any(s => s == "ref" || s == "out"))
+                    var parameterName = parameterSymbol.Name;
+                    if (parameterSymbol.RefKind == RefKind.None && parameterName == varNames[i])
                     {
                         context.ReportDiagnostic(Diagnostic.Create(Rule, expressionSyntaxes[i].GetLocation(), expressionSyntaxes[i].ToString()));
                     }

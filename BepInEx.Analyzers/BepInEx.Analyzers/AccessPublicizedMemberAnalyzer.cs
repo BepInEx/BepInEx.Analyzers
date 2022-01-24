@@ -53,7 +53,7 @@ namespace BepInEx.Analyzers
         {
             var memberAccess = (MemberAccessExpressionSyntax)context.Node;
             var symbol = context.SemanticModel.GetSymbolInfo(memberAccess.Name, context.CancellationToken).Symbol;
-            
+
             if (symbol == null)
                 return;
 
@@ -62,12 +62,12 @@ namespace BepInEx.Analyzers
                 var propertyUsage = context.Node.GetPropertyUsage();
                 if (propertyUsage == Extensions.PropertyUsage.Get || propertyUsage == Extensions.PropertyUsage.GetAndSet)
                 {
-                    var getMethodPublicizedAttribute = propertySymbol.GetMethod.GetAttribute(PublicizedAttributeName);
+                    var getMethodPublicizedAttribute = propertySymbol.GetMethod?.GetAttribute(PublicizedAttributeName);
                     Check(getMethodPublicizedAttribute, symbol, context, memberAccess);
                 }
                 else
                 {
-                    var setMethodPublicizedAttribute = propertySymbol.SetMethod.GetAttribute(PublicizedAttributeName);
+                    var setMethodPublicizedAttribute = propertySymbol.SetMethod?.GetAttribute(PublicizedAttributeName);
                     Check(setMethodPublicizedAttribute, symbol, context, memberAccess);
                 }
             }
