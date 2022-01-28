@@ -40,17 +40,9 @@ namespace BepInEx.Analyzers
             if (method.ParameterList?.Parameters.Count <= 0)
                 return;
 
-            var memberAccesses = context.Node.DescendantNodes().OfType<MemberAccessExpressionSyntax>();
-            var varNames = memberAccesses.Select(e => e.Expression.ToString()).ToList();
-            CheckExpressionSyntaxes(context, method, varNames, memberAccesses.Cast<ExpressionSyntax>().ToList());
-
             var assignments = context.Node.DescendantNodes().OfType<AssignmentExpressionSyntax>();
-            varNames = assignments.Select(e => e.Left.ToString()).ToList();
+            var varNames = assignments.Select(e => e.Left.ToString()).ToList();
             CheckExpressionSyntaxes(context, method, varNames, assignments.Cast<ExpressionSyntax>().ToList());
-
-            var accessesByIndex = context.Node.DescendantNodes().OfType<ElementAccessExpressionSyntax>();
-            varNames = accessesByIndex.Select(e => e.Expression.ToString()).ToList();
-            CheckExpressionSyntaxes(context, method, varNames, accessesByIndex.Cast<ExpressionSyntax>().ToList());
         }
 
         private static void CheckExpressionSyntaxes(SyntaxNodeAnalysisContext context, MethodDeclarationSyntax method,
@@ -60,15 +52,7 @@ namespace BepInEx.Analyzers
             {
                 foreach (var parameter in method.ParameterList.Parameters)
                 {
-                    // If parameter is a reference type and is not a literal assignment no warning needed
                     var parameterSymbol = context.SemanticModel.GetDeclaredSymbol(parameter, context.CancellationToken);
-                    if (parameterSymbol.Type.IsReferenceType)
-                    {
-                        if (!(expressionSyntaxes[i] is AssignmentExpressionSyntax assignment))
-                        {
-                            continue;
-                        }
-                    }
 
                     var parameterName = parameterSymbol.Name;
                     if (parameterSymbol.RefKind == RefKind.None && parameterName == varNames[i])
